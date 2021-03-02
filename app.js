@@ -18,6 +18,7 @@ const showImages = (images) => {
   gallery.innerHTML = '';
   // show gallery title
   galleryHeader.style.display = 'flex';
+  document.getElementById('search-status').classList.toggle('d-none');
   images.forEach(image => {
     let div = document.createElement('div');
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
@@ -122,8 +123,9 @@ const searchImage = () => {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
+  document.getElementById('search-status').classList.toggle('d-none');
+  getImages(search.value)  
   sliders.length = 0;
-  getImages(search.value)
 }
 
 const searchOnEnter = (key) => {
