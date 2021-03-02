@@ -38,15 +38,13 @@ const getImages = (query) => {
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
-  console.log(element)
-  element.classList.toggle('added');
+  element.classList.add('added');
  
   let item = sliders.indexOf(img);
-  console.log(item)
   if (item === -1) {
     sliders.push(img);
   } else {
-    sliders.pop(img);
+    alert('Hey, Already added !')
   }
 }
 var timer
@@ -69,7 +67,17 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value || 1000;
+  let duration = document.getElementById('duration').value || 1;
+  if(duration < 0) {
+    const durationOrigin = duration;
+    duration = duration * -1;
+    let msgArea = document.getElementById('msg-area');
+    msgArea.innerHTML = '';
+    let msg = document.createElement('div');
+    msg.innerHTML = `<div class="alert-info p-2 mt-3 text-center">Duration should be positive only. We converted your ${durationOrigin} seconds to ${duration} seconds.</div>`;
+    msgArea.appendChild(msg);
+  }
+  duration = duration * 1000;
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
