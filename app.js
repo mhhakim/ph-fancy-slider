@@ -1,7 +1,6 @@
 const imagesArea = document.querySelector('.images');
 const gallery = document.querySelector('.gallery');
 const galleryHeader = document.querySelector('.gallery-header');
-const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
 // selected image 
@@ -39,7 +38,7 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
- 
+
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
@@ -68,11 +67,11 @@ const createSlider = () => {
   // hide image aria
   imagesArea.style.display = 'none';
   let duration = document.getElementById('duration').value || 1;
-  if(duration < 0) {
+  let msgArea = document.getElementById('msg-area');
+  msgArea.innerHTML = '';
+  if (duration < 0) {
     const durationOrigin = duration;
     duration = duration * -1;
-    let msgArea = document.getElementById('msg-area');
-    msgArea.innerHTML = '';
     let msg = document.createElement('div');
     msg.innerHTML = `<div class="alert-info p-2 mt-3 text-center">Duration should be positive only. We converted your ${durationOrigin} seconds to ${duration} seconds.</div>`;
     msgArea.appendChild(msg);
@@ -119,13 +118,19 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
-searchBtn.addEventListener('click', function () {
+const searchImage = () => {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
-})
+}
+
+const searchOnEnter = (key) => {
+  if (key.key === "Enter") {
+    searchImage();
+  }
+}
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
