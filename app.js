@@ -74,7 +74,7 @@ const createSlider = () => {
     const durationOrigin = duration;
     duration = duration * -1;
     let msg = document.createElement('div');
-    msg.innerHTML = `<div class="alert-info p-2 mt-3 text-center">Duration should be positive only. We converted your ${durationOrigin} seconds to ${duration} seconds.</div>`;
+    msg.innerHTML = `<div class="alert-info p-2 mt-3 text-center">Duration should be positive only. We converted your <strong>${durationOrigin}</strong> seconds to <strong>${duration}</strong> seconds.</div>`;
     msgArea.appendChild(msg);
   }
   duration = duration * 1000;
